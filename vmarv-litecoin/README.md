@@ -4,34 +4,46 @@ This is a custom Umbrel app for running a Litecoin full node.
 
 ## Installation
 
-1. Copy this directory to your Umbrel server:
-   ```bash
-   scp -r umbrel-litecoin-app umbrel@192.168.86.33:~/umbrel/app-data/
-   ```
+1. Add the app store to your Umbrel:
+   - App Store → ... → Community App Stores
+   - Add: `https://github.com/Ursaclimb/vmarv-app-store`
 
-2. Rename it to follow Umbrel's naming convention:
-   ```bash
-   ssh umbrel@192.168.86.33
-   cd ~/umbrel/app-data
-   mv umbrel-litecoin-app litecoin
-   ```
+2. Install the "Litecoin Node" app
 
-3. Restart Umbrel or refresh the app store to see the app
+3. **IMPORTANT - Change Default Credentials:**
+   After installation, you MUST change the RPC credentials for security:
+   ```bash
+   ssh umbrel@<your-umbrel-ip>
+   cd ~/umbrel/app-data/vmarv-litecoin
+   # Edit docker-compose.yml and replace:
+   # LITECOIN_RPC_USER: litecoinrpc -> your-username
+   # LITECOIN_RPC_PASSWORD: changeme -> your-secure-password
+   
+   # Then restart the app
+   docker compose restart
+   ```
 
 ## Configuration
 
-- RPC User: `gossimerlite`
-- RPC Password: `red2305`
-- P2P Port: `9333`
-- RPC Port: `9332`
-- API Port: `5000`
+Default RPC Port: `9332`
+Default P2P Port: `9333`
+GUI Port: `80`
+API Port: `5000`
 
 ## Features
 
 - Full Litecoin node validation
+- Real-time dashboard with sync progress and peer info
 - REST API for blockchain queries
-- Dashboard support (when added to Umbrel UI)
+- Support for merged mining
 
 ## Storage
 
-The blockchain data is stored in a Docker volume. Initial sync may take several hours.
+The blockchain data is stored in `~/.litecoin`. Initial sync may take several hours.
+
+## Security Notes
+
+- Always change the default RPC credentials before exposing to a network
+- Keep your RPC port only accessible locally if possible
+- Consider using a firewall to restrict access to mining ports
+

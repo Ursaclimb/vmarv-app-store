@@ -18,8 +18,8 @@ services:
     ports:
       - "5000:5000"
     environment:
-      RPC_USER: gossimerlite
-      RPC_PASSWORD: red2305
+      RPC_USER: litecoinrpc
+      RPC_PASSWORD: changeme
       RPC_IP: litecoin
       RPC_PORT: "9332"
     depends_on:
@@ -36,5 +36,5 @@ services:
       - ${APP_DATA_DIR}/.litecoin:/data/.litecoin
     environment:
       LITECOIN_NETWORK: mainnet
-      LITECOIN_RPC_USER: gossimerlite
-      LITECOIN_RPC_PASSWORD: red2305
+      LITECOIN_RPC_USER: litecoinrpc
+      LITECOIN_RPC_PASSWORD: changeme

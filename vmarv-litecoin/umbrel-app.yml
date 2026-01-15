@@ -17,9 +17,7 @@ description: |
   - Transaction and block tracking
   - Network hashrate display
   
-  Default RPC Credentials:
-  - Username: gossimerlite
-  - Password: red2305
+  NOTE: Change the default RPC credentials in docker-compose.yml after installation for security.
 
 developer: vMarv
 website: https://github.com/Ursaclimb/vmarv-app-store
