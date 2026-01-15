@@ -1,0 +1,45 @@
+manifestVersion: 1
+id: litecoin
+name: Litecoin Node
+tagline: Full Litecoin node to validate transactions
+description: >-
+  Run a Litecoin full node to validate transactions and participate in the network.
+  Includes RPC API and interactive dashboard. RPC: gossimerlite / red2305
+icon: https://i.ibb.co/M22sWmM/proxy-image-4.jpg
+category: Litecoin
+version: "0.21.4"
+port: 80
+
+containers:
+  litecoin:
+    image: btcpayserver/litecoin:0.21.4
+    environment:
+      LITECOIN_NETWORK: mainnet
+      LITECOIN_RPC_USER: gossimerlite
+      LITECOIN_RPC_PASSWORD: red2305
+    ports:
+      - 9332:9332
+      - 9333:9333
+    volumes:
+      - litecoin_data:/data/.litecoin
+
+  api:
+    image: python:3.10-slim
+    environment:
+      RPC_USER: gossimerlite
+      RPC_PASSWORD: red2305
+      RPC_IP: litecoin
+      RPC_PORT: "9332"
+    ports:
+      - 5000:5000
+    volumes:
+      - ./api:/app
+    working_dir: /app
+    command: bash -c "pip install --no-cache-dir flask flask-cors requests && python app.py"
+    depends_on:
+      - litecoin
+
+volumes:
+  litecoin_data:
+
+dependencies: []

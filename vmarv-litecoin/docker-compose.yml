@@ -1,0 +1,56 @@
+version: "3.8"
+
+services:
+  litecoin:
+    image: btcpayserver/litecoin:0.21.4
+    container_name: "${COMPOSE_PROJECT_NAME}_litecoin"
+    restart: unless-stopped
+    environment:
+      LITECOIN_NETWORK: mainnet
+      LITECOIN_RPC_USER: gossimerlite
+      LITECOIN_RPC_PASSWORD: red2305
+    ports:
+      - "9332:9332"
+      - "9333:9333"
+    volumes:
+      - litecoin_data:/data/.litecoin
+    networks:
+      - app-network
+
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    container_name: "${COMPOSE_PROJECT_NAME}_api"
+    restart: unless-stopped
+    environment:
+      RPC_USER: gossimerlite
+      RPC_PASSWORD: red2305
+      RPC_IP: litecoin
+      RPC_PORT: "9332"
+    ports:
+      - "5000:5000"
+    depends_on:
+      - litecoin
+    networks:
+      - app-network
+
+  gui:
+    build:
+      context: ./gui
+      dockerfile: Dockerfile
+    container_name: "${COMPOSE_PROJECT_NAME}_gui"
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    depends_on:
+      - api
+    networks:
+      - app-network
+
+volumes:
+  litecoin_data:
+
+networks:
+  app-network:
+    driver: bridge
