@@ -1,14 +1,40 @@
 manifestVersion: 1
-id: litecoin
+id: vmarv-litecoin
 name: Litecoin Node
-tagline: Full Litecoin node to validate transactions
-description: >-
-  Run a Litecoin full node to validate transactions and participate in the network.
-  Includes RPC API and interactive dashboard. RPC: gossimerlite / red2305
+tagline: Full Litecoin node with interactive dashboard
 icon: https://i.ibb.co/M22sWmM/proxy-image-4.jpg
-category: Litecoin
+category: Bitcoin
 version: "0.21.4"
 port: 80
+description: |
+  Run a complete Litecoin full node to validate transactions and contribute to the network.
+  
+  Features:
+  - Full blockchain validation (mainnet)
+  - Interactive web dashboard with real-time statistics
+  - REST API for RPC commands
+  - Peer connections monitoring
+  - Transaction and block tracking
+  - Network hashrate display
+  
+  Default RPC Credentials:
+  - Username: gossimerlite
+  - Password: red2305
+
+developer: vMarv
+website: https://github.com/Ursaclimb/vmarv-app-store
+submitter: vMarv
+submission: https://github.com/Ursaclimb/vmarv-app-store
+repo: https://github.com/Ursaclimb/vmarv-app-store
+support: https://github.com/Ursaclimb/vmarv-app-store/issues
+gallery:
+  - https://i.ibb.co/M22sWmM/proxy-image-4.jpg
+releaseNotes: >-
+  2026.01.15 - Initial Release with GUI Dashboard, REST API, and full node support
+dependencies: []
+path: ""
+defaultUsername: ""
+defaultPassword: ""
 
 containers:
   litecoin:
