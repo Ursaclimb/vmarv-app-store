@@ -32,9 +32,6 @@ gallery:
 releaseNotes: >-
   2026.01.15 - Initial Release with GUI Dashboard, REST API, and full node support
 dependencies: []
-path: ""
-defaultUsername: ""
-defaultPassword: ""
 
 containers:
   litecoin:
