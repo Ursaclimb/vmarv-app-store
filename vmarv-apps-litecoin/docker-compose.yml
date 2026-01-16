@@ -18,10 +18,10 @@ services:
     ports:
       - "5000:5000"
     environment:
-      RPC_USER: litecoinrpc
-      RPC_PASSWORD: changeme
-      RPC_IP: litecoin
-      RPC_PORT: "9332"
+      RPC_USER: ${LITECOIN_RPC_USER}
+      RPC_PASSWORD: ${LITECOIN_RPC_PASSWORD}
+      RPC_IP: ${LITECOIN_NODE_IP}
+      RPC_PORT: "${LITECOIN_RPC_PORT}"
     depends_on:
       - litecoin
 
@@ -30,11 +30,11 @@ services:
     restart: on-failure
     stop_grace_period: 1m
     ports:
-      - "9332:9332"
-      - "9333:9333"
+      - "${LITECOIN_RPC_PORT}:9332"
+      - "${LITECOIN_P2P_PORT}:9333"
     volumes:
       - ${APP_DATA_DIR}/.litecoin:/data/.litecoin
     environment:
       LITECOIN_NETWORK: mainnet
-      LITECOIN_RPC_USER: litecoinrpc
-      LITECOIN_RPC_PASSWORD: changeme
+      LITECOIN_RPC_USER: ${LITECOIN_RPC_USER}
+      LITECOIN_RPC_PASSWORD: ${LITECOIN_RPC_PASSWORD}
